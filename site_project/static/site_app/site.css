@@ -123,3 +123,34 @@ footer a:hover {
     color:#fff;
     text-decoration: none;
 }
+
+.button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    color: #cbd5db;
+
+    height: 40px;
+    width: 30px;
+}
+
+.button:hover {
+    background: none;
+    color: #fff;
+}
+
+.post-img {
+    object-fit: cover;
+    max-width: 20%;
+    max-height: 20%;
+}
+
+.post-detail-img {
+    object-fit: cover;
+    max-width: 100%;
+    max-height: 100%;
+}
