@@ -13,9 +13,9 @@
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 
     {% if title %}
-    <title>Распознаватель котиков {{ title }}</title>
+    <title>Котознайка {{ title }}</title>
     {% else %}
-    <title>Распознаватель котиков на изображениях</title>
+    <title>Котознайка</title>
     {% endif %}
 </head>
 <body>
@@ -23,9 +23,9 @@
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
         <div class="container">
             {% if user.is_authenticated %}
-                <a class="navbar-brand mr-4" href="{% url 'site-home' %}"><i class='bx bxs-cat bx-tada-hover'></i>Распознаватель котиков</a>
+                <a class="navbar-brand mr-4" href="{% url 'site-home' %}"><i class='bx bxs-cat bx-tada-hover'></i>Котознайка</a>
             {% else %}
-                <a class="navbar-brand mr-4" href="{% url 'register' %}"><i class='bx bxs-cat bx-tada-hover'></i>Распознаватель котиков</a>
+                <a class="navbar-brand mr-4" href="{% url 'register' %}"><i class='bx bxs-cat bx-tada-hover'></i>Котознайка</a>
             {% endif %}
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -39,24 +39,23 @@
                         <a class="nav-item nav-link " href="{% url 'register' %}">Главная</a>
                     {% endif %}
 
-                    <a class="nav-item nav-link" href="{% url 'site-about' %}">Обо мне</a>
-
                     {% if user.is_authenticated %}
                         <a class="nav-item nav-link" href="{% url 'user-posts' user.username %}">Мои посты</a>
                     {% endif %}
+
+                    <a class="nav-item nav-link" href="{% url 'site-about' %}">Домашняя</a>
                 </div>
                 <!-- Правая часть навигационной панели -->
                 <div class="navbar-nav">
                     {% if user.is_authenticated %}
-                    <a class="nav-item nav-link" href="{% url 'post-create' %}">Новая запись</a>
-                    <a class="nav-item nav-link" href="{% url 'profile' %}">Профиль</a>
-                    <form id="logout-form" class="form_button" action="{% url 'logout' %}" method="POST">
-                        {% csrf_token %}
-                        <button class="button" type="submit">Выход</button>
-                    </form>
+                        <a class="nav-item nav-link" href="{% url 'profile' %}">Профиль</a>
+                        <form id="logout-form" class="form_button" action="{% url 'logout' %}" method="POST">
+                            {% csrf_token %}
+                            <button class="button" type="submit">Выход</button>
+                        </form>
                     {% else %}
-                    <a class="nav-item nav-link" href="{% url 'login' %}">Вход</a>
-                    <a class="nav-item nav-link" href="{% url 'register' %}">Регистрация</a>
+                        <a class="nav-item nav-link" href="{% url 'login' %}">Вход</a>
+                        <a class="nav-item nav-link" href="{% url 'register' %}">Регистрация</a>
                     {% endif %}
                 </div>
             </div>

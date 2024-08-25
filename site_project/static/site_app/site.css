@@ -135,7 +135,7 @@ footer a:hover {
     color: #cbd5db;
 
     height: 40px;
-    width: 30px;
+    width: 60px;
 }
 
 .button:hover {
@@ -153,4 +153,11 @@ footer a:hover {
     object-fit: cover;
     max-width: 100%;
     max-height: 100%;
+}
+
+.button-post {
+    display: flex;
+    justify-content: right;
+
+    padding-bottom: 10px;
 }

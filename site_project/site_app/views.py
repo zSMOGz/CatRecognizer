@@ -8,8 +8,8 @@ from django.views.generic import (
     UpdateView,
     DeleteView
 )
+from hashlib import md5
 from .models import Post
-
 
 def home(request):
     context = {
@@ -17,13 +17,13 @@ def home(request):
     }
 
     return render(request,
-                  'site_app/home.html',
+                  'site_app/dashboard.html',
                   context)
 
 
 class PostListView(ListView):
     model = Post
-    template_name = 'site_app/home.html'
+    template_name = 'site_app/dashboard.html'
     context_object_name = 'posts'
     ordering = ['-date_posted']
     paginate_by = 5
@@ -31,7 +31,7 @@ class PostListView(ListView):
 
 class UserPostListView(ListView):
     model = Post
-    template_name = 'site_app/home.html'
+    template_name = 'site_app/dashboard.html'
     context_object_name = 'posts'
     ordering = ['-date_posted']
     paginate_by = 5
@@ -50,6 +50,7 @@ class PostCreateView(LoginRequiredMixin,
                      CreateView):
     model = Post
     fields = ['title',
+              'haar_cascade',
               'upload_image',
               'content'
               ]
@@ -65,6 +66,7 @@ class PostUpdateView(LoginRequiredMixin,
                      UpdateView):
     model = Post
     fields = ['title',
+              'haar_cascade',
               'upload_image',
               'content'
               ]
@@ -95,5 +97,5 @@ class PostDeleteView(LoginRequiredMixin,
 
 def about(request):
     return render(request,
-                  'site_app/about.html',
+                  'site_app/home.html',
                   {'title': 'О распознавании котиков'})
