@@ -19,7 +19,7 @@ def detect_cat_face(upload_image,
     faces, _, confidences = face_cascade.detectMultiScale3(gray_image,
                                                            scaleFactor=1.02,
                                                            minNeighbors=1,
-                                                           minSize=(30, 30),
+                                                           minSize=(50, 50),
                                                            flags=cv2.CASCADE_SCALE_IMAGE,
                                                            outputRejectLevels=True)
 
