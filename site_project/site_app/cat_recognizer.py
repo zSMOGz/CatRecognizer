@@ -4,7 +4,8 @@ from numpy import array
 
 
 def detect_cat_face(upload_image,
-                    haar_cascade):
+                    haar_cascade,
+                    haar_name):
     face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + haar_cascade)
 
     if face_cascade.empty():
@@ -37,7 +38,7 @@ def detect_cat_face(upload_image,
                               (0, 0, 255))
 
                 cv2.putText(image_original,
-                            str(round(confidences[face_index]/5*100, 2)),
+                            f'{haar_name[1]} {str(round(confidences[face_index]/5*100, 2))}',
                             (x, y - 5),
                             cv2.FONT_HERSHEY_SIMPLEX,
                             0.5,

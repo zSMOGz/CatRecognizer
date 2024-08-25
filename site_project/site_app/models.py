@@ -17,6 +17,23 @@ from site_project.settings import MEDIA_ROOT
 
 def get_haar_cascade():
     haar_cascade = []
+    haar_cascade_names = ['eye',
+                          'eyeglass',
+                          'cat',
+                          'cat extends',
+                          'face alt',
+                          'face alt2',
+                          'face alt tree',
+                          'face default',
+                          'full body',
+                          'left eye 2splits',
+                          'license plate rus 16',
+                          'lower body',
+                          'profile face',
+                          'right eye 2splits',
+                          'russian plate number',
+                          'smile',
+                          'upper body']
 
     for root, dirs, files in os.walk(cv2.data.haarcascades):
         for file in files:
@@ -24,16 +41,18 @@ def get_haar_cascade():
                 haar_cascade.append(file)
 
     return zip(haar_cascade,
-               haar_cascade)
+               haar_cascade_names)
 
 
 class Post(models.Model):
+    haar_cascade_pairs = get_haar_cascade()
+
     title = models.CharField(verbose_name="Заголовок поста",
                              max_length=100,
                              null=False)
     content = models.TextField(verbose_name="Текст",
                                null=False)
-    haar_cascade = models.CharField(choices=get_haar_cascade(),
+    haar_cascade = models.CharField(choices=haar_cascade_pairs,
                                     verbose_name="Классификатор",
                                     max_length=100,
                                     null=True)
@@ -75,8 +94,11 @@ class Post(models.Model):
 
                 img.save(self.upload_image.path)
 
+        haar_cascade_pairs = get_haar_cascade()
+
         recognize_img = detect_cat_face(self.upload_image,
-                                        self.haar_cascade)
+                                        self.haar_cascade,
+                                        list(filter(lambda x: x[0] == self.haar_cascade, haar_cascade_pairs))[0])
         if recognize_img is not None:
             recognize_img_path = MEDIA_ROOT + '\\recognize_images\\'
             recognize_img_name = self.upload_image.name.split("/")[1]
